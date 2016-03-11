@@ -16,6 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular-canvas-painter": "^0.5.3"
+    "angular-canvas-painter": "^0.5.3",
+    "ng-sweet-alert": "^1.0.5"
   }
 }

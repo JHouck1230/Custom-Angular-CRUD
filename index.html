@@ -4,38 +4,65 @@
 	<meta charset="UTF-8">
 	<title>Draw Something!</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+	<link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
   <script src="./bower_components/angular-canvas-painter/dist/angular-canvas-painter.js"></script>
   <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
   <script src="module.js"></script>
   <script src="controllers.js"></script>
   <script src="services.js"></script>
 </head>
 <body ng-app='drawApp' ng-controller='drawCtrl'>
-	<div class="jumbotron">
-		<h2>Draw Something!</h2>
-		<button ng-click='drawStuff()' class='btn'>Draw Something!</button>
-	</div>
 
+	<div class="jumbotron">
+		<button ng-click='drawStuff()' class='btn btn-default btn-lg'>Draw Something!</button>
+	</div>
 
 	<div id='easel' ng-show='drawSomething'>
-		<div pw-canvas options="{width: 400, height: 300, backgroundColor: '#FFF9EC', color: model.myColor, lineWidth: 10, opacity: 0.9, undo: 20, customCanvasId: 'theCanvas'}" version="model.version"></div>
-		<div pw-color-selector="['#000000', '#808080', '#FFFFFF', '#FF0000', '#FFFF00', '#0080FF', '#008000', '#FF00FF', '#804000']" color="model.myColor"></div>
-<!-- 		<input type="range" min="1" max="50" ng-model="lineWidth" class="lineWidthSelector"> -->
-		<input type="text" ng-model='newDrawing.title' placeholder="Title">
-		<input type="text" ng-model='newDrawing.artist' placeholder="Artist">
-		<button ng-click='saveDrawing()'>Save</button>
+		<div class="container">
+			<div id='frame'>
+			<div pw-canvas options="{width: 400, height: 300, backgroundColor: '#FFFFFF', color: model.myColor, lineWidth: 10, opacity: 0.9, undo: 0, customCanvasId: 'theCanvas'}" version="model.version"></div>
+			</div>
+			<div pw-color-selector="['#000000', '#808080', '#FFFFFF', '#FF0000', '#FFFF00', '#0080FF', '#008000', '#FF00FF', '#804000']" color="model.myColor"></div>
+
+<!-- 				<input type="range" min="1" max="50" ng-model="lineWidth" class="lineWidthSelector"> -->
+	
+			<div class="row">
+				<div class="input-group center-block">
+					<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+			      <input type="text" ng-model='newDrawing.title' class="form-control" placeholder="Title">
+		      </div>
+  				<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+			      <input type="text" ng-model='newDrawing.artist' class="form-control" placeholder="Artist">
+		      </div>
+   				<div class="col-xs-12 col-sm-4 col-md-1 col-lg-1">
+			      <span class="input-group-btn">
+			        <button ng-click='saveDrawing()' class='btn btn-success'>
+				        <span class="glyphicon glyphicon-floppy-save"></span>
+			        </button>
+			      </span>
+			      <span class="input-group-btn">
+			        <button ng-click='cancelDrawing()' class='btn btn-danger'>
+				        <span class="glyphicon glyphicon-remove"></span>
+			        </button>
+			      </span>
+			    </div>
+				</div>
+			</div>
+		</div>
 	</div>
 
-
-	<div class="container">
+	<div id='thumbnails' class="container">
 
 
 		<div class="row">
 		  <div ng-repeat='drawing in drawings' class="col-xs-6 col-md-3">
-		    <a ng-click='showModal(drawing)' data-toggle='modal' data-target='#drawingModal' class="thumbnail">
+		    <a ng-click='populateModal(drawing)' data-toggle='modal' data-target='#drawingModal' class="thumbnail">
 		      <img ng-src="{{drawing.data}}">
 		    </a>
 		  </div>
@@ -52,12 +79,18 @@
 		        <input type="text" ng-show="editing" ng-model='showcase.artist' placeholder="Artist">
 		      </div>
 			      <div class="modal-body">
-			        <img ng-src="{{showcase.data}}">
+			        <img id="showcaseImg" ng-src="{{showcase.data}}">
 			      </div>
 		      <div class="modal-footer">
-		      	<button ng-click='removeDrawing(showcase)' class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
-		      	<button ng-hide='editing' ng-click='editDrawing()' class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
-		      	<button ng-show='editing' ng-click='submitEdit(showcase)' class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span></button>
+		      	<button ng-click='initDelete(showcase)' class="btn btn-danger">
+		      		<span class="glyphicon glyphicon-remove"></span>
+	      		</button>
+		      	<button ng-hide='editing' ng-click='editDrawing()' class="btn btn-warning">
+			      	<span class="glyphicon glyphicon-pencil"></span>
+		      	</button>
+		      	<button ng-show='editing' ng-click='submitEdit(showcase)' class="btn btn-success">
+			      	<span class="glyphicon glyphicon-floppy-save"></span>
+		      	</button>
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		      </div>
 		    </div>

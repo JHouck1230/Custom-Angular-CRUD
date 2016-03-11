@@ -1,7 +1,21 @@
-#theCanvas {
+* {
+ -webkit-user-select: none;
+ -moz-user-select: none;
+ -ms-user-select: none;
+ -o-user-select: none;
+ user-select: none;
+}
+
+body {
+	background-color: #FFF9EC;
+	font-family: 'Amatic SC', cursive;
+}
+
+#theCanvas, #theCanvasTmp {
 	border: 1px solid #EBE7D9;
 	width: 400px;
 	height: 300px;
+	cursor: url(http://www.cursor.cc/cursor/99/9/cursor.png) 0 0, pointer;
 }
 
 .pwColor {
@@ -11,6 +25,25 @@
   height: 30px;
   margin-right: 5px;
   border: 2px solid black;
+}
+
+.center-block {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+  padding-left: 25%;
+}
+
+#frame {
+	background-color: #FFFFFF;
+	width: 400px;
+	height: 300px;
+	margin: 10px;
+}
+
+.jumbotron {
+	background: #7F7C76;
+	color: #FFFFFF;
 }
 
 input.lineWidthSelector.ng-pristine.ng-untouched.ng-valid.ng-empty {
@@ -23,16 +56,66 @@ input.lineWidthSelector.ng-pristine.ng-untouched.ng-valid.ng-empty {
 
 .modal-header {
   text-align: left;
+	background-color: #CCC7BD;
 }
 
-button.btn.btn-warning, button.btn.btn-danger, button.btn.btn-success {
+.modal-footer {
+	background-color: #CCC7BD;
+}
+
+button.btn.btn-warning, button.btn.btn-danger, button.btn.btn-success, button.btn.btn-info {
   float: left;
 }
 
 button.btn {
-  margin-left: 15px;
+  margin-left: 10px;
 }
 
 h2 {
   margin-left: 15px;
+}
+
+#thumbnails {
+	margin: 20px;
+}
+
+.thumbnail {
+	cursor: pointer;
+}
+
+#celeb {
+	width: 50%;
+	height: 50%;
+}
+
+#showcaseImg {
+	border: 1px solid #000000;
+}
+
+button.btn.btn-default.btn-lg {
+  font-size: 75px;
+}
+
+.jumbotron {
+  text-align: center;
+}
+
+.form-control {
+  font-size: 24px;
+}
+
+h3.modal-title.ng-binding {
+  font-size: 36px;
+}
+
+h5.modal-artist.ng-binding {
+  font-size: 24px;
+}
+
+button.btn.btn-default {
+  font-size: 16px;
+}
+
+div#easel {
+  text-align: -webkit-center;
 }

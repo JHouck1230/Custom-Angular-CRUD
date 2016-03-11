@@ -3,6 +3,7 @@
 var app = angular.module('drawApp');
 
 app.controller('drawCtrl', function($scope, DrawService) {
+
 	DrawService.fetch()
 	.then(function(res) {
 		$scope.drawings = res.data;
@@ -11,30 +12,72 @@ app.controller('drawCtrl', function($scope, DrawService) {
 	});
 
 	$scope.saveDrawing = function() {
+		if($scope.newDrawing.title && $scope.newDrawing.artist) {
+			$scope.drawSomething = false;
+			var canvas = document.getElementById('theCanvas');
+			$scope.newDrawing.data = canvas.toDataURL();
+			DrawService.create($scope.newDrawing)
+			.then(function(res) {
+				$scope.drawings.push(res.data);
+				$scope.cancelDrawing();
+			}, function(err) {
+				console.error(err);
+			});
+		};
+	};
+
+	$scope.cancelDrawing = function() {
 		$scope.drawSomething = false;
 		var canvas = document.getElementById('theCanvas');
-		$scope.newDrawing.data = canvas.toDataURL();
-		DrawService.create($scope.newDrawing)
-		.then(function(res) {
-			$scope.drawings.push(res.data);
-		}, function(err) {
-			console.error(err);
-		});
+		var canvasTmp = document.getElementById('theCanvasTmp');
+		var context = canvas.getContext('2d');
+		var contextTmp = canvasTmp.getContext('2d');
+		if($scope.newDrawing.title) $scope.newDrawing.title = '';
+		if($scope.newDrawing.artist) $scope.newDrawing.artist = '';
+		canvas = context.clearRect(0, 0, canvas.width, canvas.height);
+		canvasTmp = contextTmp.clearRect(0, 0, canvasTmp.width, canvasTmp.height);
 	};
 
 	$scope.drawStuff = function() {
 		$scope.drawSomething = true;
 	};
 
-	$scope.showModal = function(drawing) {
+	$scope.populateModal = function(drawing) {
 		$scope.showcase = drawing;
+	};
+
+  $scope.checkCancel = function() {
+	  console.log("check cancel");
+  };
+  
+  $scope.checkConfirm = function() {
+    console.log("check confrim");
+  };
+
+  $scope.initDelete = function(showcase) {
+		swal(
+			{   
+				title: "Are you sure?",
+				text: "You will not be able to recover this drawing!",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "Yes, delete it!",
+				closeOnConfirm: false 
+			}, function() {
+				$scope.removeDrawing(showcase);
+			})
+
 	};
 
 	$scope.removeDrawing = function(showcase) {
 		var index = $scope.drawings.indexOf(showcase);
 		DrawService.remove(showcase)
 		.then(function(res) {
+			$('#drawingModal').modal('hide');
 			$scope.drawings.splice(index, 1);
+			swal("Deleted!", "Your drawing has been erased.", "success"); 
+			$scope.cancelDrawing();
 		}, function(err) {
 			console.error(err);
 		});
@@ -62,4 +105,11 @@ app.controller('drawCtrl', function($scope, DrawService) {
 			console.error(err);
 		});
 	};
+
 });
+
+
+
+
+
+
