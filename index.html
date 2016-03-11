@@ -46,7 +46,7 @@
 			      </span>
 			      <span class="input-group-btn">
 			        <button ng-click='cancelDrawing()' class='btn btn-danger'>
-				        <span class="glyphicon glyphicon-remove"></span>
+				        <span class="glyphicon glyphicon-trash"></span>
 			        </button>
 			      </span>
 			    </div>
@@ -81,7 +81,7 @@
 			      </div>
 		      <div class="modal-footer">
 		      	<button ng-click='initDelete(showcase)' class="btn btn-danger">
-		      		<span class="glyphicon glyphicon-remove"></span>
+		      		<span class="glyphicon glyphicon-trash"></span>
 	      		</button>
 		      	<button ng-hide='editing' ng-click='editDrawing()' class="btn btn-warning">
 			      	<span class="glyphicon glyphicon-pencil"></span>
@@ -89,7 +89,9 @@
 		      	<button ng-show='editing' ng-click='submitEdit(showcase)' class="btn btn-success">
 			      	<span class="glyphicon glyphicon-floppy-save"></span>
 		      	</button>
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">
+		        	<span class="glyphicon glyphicon-remove"></span>
+		        </button>
 		      </div>
 		    </div>
 		  </div>
