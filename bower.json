@@ -1,0 +1,21 @@
+{
+  "name": "DrawSomething",
+  "description": "",
+  "main": "app.js",
+  "authors": [
+    "Josh Houck <Josh123090@gmail.com>"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-canvas-painter": "^0.5.3"
+  }
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Draw Something!</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
+  <script src="./bower_components/angular-canvas-painter/dist/angular-canvas-painter.js"></script>
+  <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="module.js"></script>
+  <script src="controllers.js"></script>
+  <script src="services.js"></script>
+</head>
+<body ng-app='drawApp' ng-controller='drawCtrl'>
+	<div class="jumbotron">
+		<h2>Draw Something!</h2>
+		<button ng-click='drawStuff()' class='btn'>Draw Something!</button>
+	</div>
+
+
+	<div id='easel' ng-show='drawSomething'>
+		<div pw-canvas options="{width: 400, height: 300, backgroundColor: '#FFF9EC', color: model.myColor, lineWidth: 10, opacity: 0.9, undo: 20, customCanvasId: 'theCanvas'}" version="model.version"></div>
+		<div pw-color-selector="['#000000', '#808080', '#FFFFFF', '#FF0000', '#FFFF00', '#0080FF', '#008000', '#FF00FF', '#804000']" color="model.myColor"></div>
+<!-- 		<input type="range" min="1" max="50" ng-model="lineWidth" class="lineWidthSelector"> -->
+		<input type="text" ng-model='newDrawing.title' placeholder="Title">
+		<input type="text" ng-model='newDrawing.artist' placeholder="Artist">
+		<button ng-click='saveDrawing()'>Save</button>
+	</div>
+
+
+	<div class="container">
+
+
+		<div class="row">
+		  <div ng-repeat='drawing in drawings' class="col-xs-6 col-md-3">
+		    <a ng-click='showModal()' data-toggle='modal' data-target='#drawingModal' class="thumbnail">
+		      <img ng-src="{{drawing.data}}">
+		    </a>
+		  </div>
+		</div>
+
+
+	  <div class="modal fade" id="drawingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title" id="myModalLabel">{{showcase.title}}</h4>
+		        <h5>{{showcase.artist}}</h5>
+		      </div>
+			      <div class="modal-body">
+			        <img ng-src="{{showcase.data}}">
+			      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+
+	</div>
+</body>
+</html>
