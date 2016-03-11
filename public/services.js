@@ -10,4 +10,12 @@ app.service('DrawService', function($http) {
 	this.create = function(newDrawing) {
 		return $http.post('/drawings', newDrawing);
 	};
+
+	this.remove = function(showcase) {
+		return $http.delete(`/drawings/${showcase.id}`);
+	};
+
+	this.edit = function(showcase) {
+		return $http.put(`/drawings/${showcase.id}`, showcase);
+	};
 });

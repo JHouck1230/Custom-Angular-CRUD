@@ -35,24 +35,29 @@
 
 		<div class="row">
 		  <div ng-repeat='drawing in drawings' class="col-xs-6 col-md-3">
-		    <a ng-click='showModal()' data-toggle='modal' data-target='#drawingModal' class="thumbnail">
+		    <a ng-click='showModal(drawing)' data-toggle='modal' data-target='#drawingModal' class="thumbnail">
 		      <img ng-src="{{drawing.data}}">
 		    </a>
 		  </div>
 		</div>
 
 
-	  <div class="modal fade" id="drawingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal fade" id="drawingModal" tabindex="-1" role="dialog">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h4 class="modal-title" id="myModalLabel">{{showcase.title}}</h4>
-		        <h5>{{showcase.artist}}</h5>
+		        <h3 ng-hide='editing' class="modal-title">{{showcase.title}}</h3>
+		        <input type="text" ng-show="editing" ng-model='showcase.title' placeholder="Title">
+		        <h5 ng-hide='editing' class="modal-artist">{{showcase.artist}}</h5>
+		        <input type="text" ng-show="editing" ng-model='showcase.artist' placeholder="Artist">
 		      </div>
 			      <div class="modal-body">
 			        <img ng-src="{{showcase.data}}">
 			      </div>
 		      <div class="modal-footer">
+		      	<button ng-click='removeDrawing(showcase)' class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+		      	<button ng-hide='editing' ng-click='editDrawing()' class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
+		      	<button ng-show='editing' ng-click='submitEdit(showcase)' class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span></button>
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		      </div>
 		    </div>

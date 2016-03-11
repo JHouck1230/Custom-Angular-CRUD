@@ -5,14 +5,34 @@
 }
 
 .pwColor {
-    display: inline-block;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    margin-right: 5px;
-    border: 2px solid black;
+  display: inline-block;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+  border: 2px solid black;
 }
 
 input.lineWidthSelector.ng-pristine.ng-untouched.ng-valid.ng-empty {
 	width: inherit;
+}
+
+.modal-content {
+  text-align: center;
+}
+
+.modal-header {
+  text-align: left;
+}
+
+button.btn.btn-warning, button.btn.btn-danger, button.btn.btn-success {
+  float: left;
+}
+
+button.btn {
+  margin-left: 15px;
+}
+
+h2 {
+  margin-left: 15px;
 }
