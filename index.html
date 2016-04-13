@@ -70,12 +70,14 @@
 	  <div class="modal fade" id="drawingModal" tabindex="-1" role="dialog">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
+
 		      <div class="modal-header">
 		        <h3 ng-hide='editing' class="modal-title">{{showcase.title}}</h3>
-		        <input type="text" ng-show="editing" ng-model='showcase.title' placeholder="Title">
+		        <input class='inputEdit' type="text" ng-show="editing" ng-model='showcase.title' placeholder="Title"><br ng-if='editing'>
 		        <h5 ng-hide='editing' class="modal-artist">{{showcase.artist}}</h5>
-		        <input type="text" ng-show="editing" ng-model='showcase.artist' placeholder="Artist">
+		        <input class='inputEdit' type="text" ng-show="editing" ng-model='showcase.artist' placeholder="Artist">
 		      </div>
+		      
 			      <div class="modal-body">
 			        <img id="showcaseImg" ng-src="{{showcase.data}}">
 			      </div>

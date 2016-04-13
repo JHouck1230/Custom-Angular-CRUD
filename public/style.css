@@ -15,7 +15,7 @@ body {
 	border: 1px solid #EBE7D9;
 	width: 400px;
 	height: 300px;
-	cursor: url(http://www.cursor.cc/cursor/99/9/cursor.png) 0 0, pointer;
+	cursor: url(https://www.cursor.cc/cursor/99/9/cursor.png) 0 0, pointer;
 }
 
 .pwColor {
@@ -25,6 +25,10 @@ body {
   height: 30px;
   margin-right: 5px;
   border: 2px solid black;
+}
+
+.inputEdit {
+	font-size: 26px;
 }
 
 .center-block {

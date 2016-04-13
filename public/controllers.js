@@ -18,6 +18,7 @@ app.controller('drawCtrl', function($scope, DrawService) {
 			$scope.newDrawing.data = canvas.toDataURL();
 			DrawService.create($scope.newDrawing)
 			.then(function(res) {
+				console.log(res.data);
 				$scope.drawings.push(res.data);
 				$scope.cancelDrawing();
 			}, function(err) {
